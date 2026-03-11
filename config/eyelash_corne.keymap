@@ -58,12 +58,25 @@
         #sensor-binding-cells = <0>;
         bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
     };
+    scrl_dn_mm: scroll_down_mod_morph {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&msc SCRL_DOWN>, <&msc SCRL_RIGHT>;
+        mods = <(MOD_LALT|MOD_RALT)>;
+    };
+
+    scrl_up_mm: scroll_up_mod_morph {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&msc SCRL_UP>, <&msc SCRL_LEFT>;
+        mods = <(MOD_LALT|MOD_RALT)>;
+    };
 
     scroll_encoder: scroll_encoder {
         compatible = "zmk,behavior-sensor-rotate";
         #sensor-binding-cells = <0>;
-        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-
+        // Use the mod-morphs instead of direct scroll bindings
+        bindings = <&scrl_dn_mm>, <&scrl_up_mm>;
         tap-ms = <100>;
     };
 
