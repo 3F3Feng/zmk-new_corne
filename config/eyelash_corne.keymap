@@ -79,7 +79,24 @@
         bindings = <&scrl_dn_mm>, <&scrl_up_mm>;
         tap-ms = <100>;
     };
+    vol_up_mm: volume_up_mod_morph {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&kp C_VOLUME_UP>, <&kp RIGHT>;
+        mods = <(MOD_LALT|MOD_RALT)>;
+    };
 
+    vol_dn_mm: volume_down_mod_morph {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&kp C_VOLUME_DOWN>, <&kp LEFT>;
+        mods = <(MOD_LALT|MOD_RALT)>;
+    };
+    vol_encoder: vol_encoder {
+        compatible = "zmk,behavior-sensor-rotate";
+        #sensor-binding-cells = <0>;
+        bindings = <&vol_up_mm>, <&vol_dn_mm>;
+    };
     combos {
         compatible = "zmk,combos";
 
@@ -101,7 +118,7 @@
                          &kp LGUI  &kp LALT  &lt 1 SPACE                                                  &lt 3 SPACE  &my_lt 2 SPACE  &kp RIGHT_SHIFT
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
+            sensor-bindings = <&vol_encoder>;
         };
 
         lower_layer {
